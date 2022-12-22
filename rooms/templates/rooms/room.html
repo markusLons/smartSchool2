@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Кабинет {{ room_number }}</title>
+</head>
+<body>
+    <h1>Кабинет {{ room_number }}</h1>
+    <h2>{% if light == 1 %}
+        Свет включен
+    {% else %}
+        Свет выключен
+    {% endif %}</h2>
+    <h2>{% if door == 1 %}
+        Дверь открыта
+    {% else %}
+        Дверь закрыта
+    {% endif %}</h2>
+    <h2>{% if alarm == 1 %}
+        Движение обнаружено
+    {% else %}
+        Движение не обнаружено
+    {% endif %}</h2>
+<!-- Кнопки всключения и отключения -->
+    <!-- Кнопки перенаправляют на ту же страницу -->
+    <form action="/room/{{ room_number }}" method="post">
+        {% csrf_token %}
+        {% if light == 1 %}
+            <input type="submit" name="light" value="Выключить свет">
+        {% else %}
+            <input type="submit" name="light" value="Включить свет">
+        {% endif %}
+        {% if door == 1 %}
+            <input type="submit" name="door" value="Закрыть дверь">
+        {% else %}
+            <input type="submit" name="door" value="Открыть дверь">
+        {% endif %}
+    </form>
+
+</body>
+</html>
